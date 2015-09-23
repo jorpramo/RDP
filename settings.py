@@ -11,9 +11,18 @@
 
 BOT_NAME = 'RDP'
 
-SPIDER_MODULES = ['RDP.spiders']
-NEWSPIDER_MODULE = 'RDP.spiders'
+ITEM_PIPELINES = {'pipelines.MongoPipeline':100,}
 
+SPIDER_MODULES = ['spiders']
+NEWSPIDER_MODULE = 'spiders'
+
+MONGO_DATABASE = 'rdp'
+MONGODB_COLLECTION = 'restaurantes'
+MONGODB_UNIQ_KEY = 'url'
+MONGODB_ITEM_ID_FIELD = '_id'
+MONGODB_SAFE = True
+#MONGO_URI = 'mongodb://localhost:27017/'
+MONGO_URI = 'mongodb://rdpbatch:rdp2015@ds051943.mongolab.com:51943/rdp'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'RDP (+http://www.yourdomain.com)'
