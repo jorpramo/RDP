@@ -2,7 +2,7 @@ import pymongo
 
 class MongoPipeline(object):
 
-    collection_name = 'servicios'
+    collection_name = 'restaurantes'
 
     def __init__(self, mongo_uri, mongo_db):
         self.mongo_uri = mongo_uri

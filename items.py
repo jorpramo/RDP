@@ -10,7 +10,7 @@ import scrapy
 class Restaurante(scrapy.Item):
     nombre = scrapy.Field()
     posicion = scrapy.Field()
-    direccion = scrapy.Field()
+    link = scrapy.Field()
 
 class RdpItem(scrapy.Item):
     # define the fields for your item here like:
