@@ -6,7 +6,7 @@ from flask import Flask, redirect, request, url_for
 from flask import render_template
 import logging
 import sys
-
+import yelp_api
 
 app = Flask(__name__)
 # Create dummy secrey key so we can use sessions
@@ -18,21 +18,17 @@ app.logger.setLevel(logging.ERROR)
 def index():
     return render_template('index.html')
 
-@app.route('/sorteo/')
+@app.route('/sorteo/',methods=['POST'])
 def sorteo():
 
-    client = pymongo.MongoClient(set.MONGO_URI)
-    db = client.rdp
-    rest=db.restaurantes
+    # la funcion dame_restaurante devuelve un registro de tipo business del api de yelp
+    # https://www.yelp.com/developers/documentation/v2/business
 
-    #cursor=rest.find({"posicion": num})[0]
-    conteo=0
-    while (conteo==0):
-        num=str(random.randint(1, 2500))
-        cursor=rest.find({"posicion": num})
-        conteo=cursor.count()
-    nombre=cursor[0]['nombre']
-    return render_template('sorteo.html', num=num, nombre=nombre)
+    elegido=yelp_api.dame_restaurante(request.form['ciudad'])
+    num=elegido[0].rating
+    nombre=elegido[0].name
+
+    return render_template('sorteo.html', num=num, nombre=nombre, imagen=elegido[0].image_url,url=elegido[0].url, telefono=elegido[0].display_phone, direccion=elegido[0].location.display_address )
 
 
 if __name__ == '__main__':
