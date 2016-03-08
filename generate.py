@@ -1,8 +1,5 @@
 __author__ = 'jpradas'
-import random
-import pymongo
-import settings as set
-from flask import Flask, redirect, request, url_for
+from flask import Flask,  request
 from flask import render_template
 import logging
 import sys
